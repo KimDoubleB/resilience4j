@@ -1,0 +1,31 @@
+dependencies {
+    implementation project(':resilience4j-core')
+    implementation project(':resilience4j-retry')
+    implementation project(':resilience4j-circuitbreaker')
+    implementation project(':resilience4j-ratelimiter')
+    implementation project(':resilience4j-bulkhead')
+    implementation project(':resilience4j-timelimiter')
+
+    compileOnly(libraries.spring6_core)
+    compileOnly "org.springframework:spring-web:${spring6Version}"
+    compileOnly "org.springframework:spring-webflux:${spring6Version}"
+
+    // Optional: Reactor support
+    compileOnly(libraries.reactor)
+    compileOnly project(':resilience4j-reactor')
+
+    testImplementation(libraries.spring6_core)
+    testImplementation "org.springframework:spring-web:${spring6Version}"
+    testImplementation "org.springframework:spring-webflux:${spring6Version}"
+    testImplementation(libraries.reactor)
+    testImplementation(libraries.reactor_test)
+    testImplementation project(':resilience4j-reactor')
+    testImplementation(libraries.spring_boot3_test)
+    testImplementation "com.squareup.okhttp3:mockwebserver:4.12.0"
+}
+
+ext.moduleName = 'io.github.resilience4j.spring6.httpexchange'
+
+test {
+    useJUnitPlatform()
+}
